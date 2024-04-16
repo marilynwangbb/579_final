@@ -3,21 +3,34 @@ import { Table, Form, Button } from 'react-bootstrap';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import StatusCell from './StatusCell';
+import TableAutoFill from './TableAutoFill';
+import companies from './data/companies';
 
 const InteractiveTable = () => {
-  const [rows, setRows] = useState([
-    { id: 1, company: "", status: "", industry: "", position: "" }
-  ]);
+  const [rows, setRows] = useState(() => {
+    const savedRows = localStorage.getItem('tableRows');
+    return savedRows ? JSON.parse(savedRows) : [{ id: 1, company: "", status: "", industry: "", position: "" }];
+  });
+
+  const updateRows = (newRows) => {
+    setRows(newRows);
+    localStorage.setItem('tableRows', JSON.stringify(newRows));
+  };
 
   const handleChange = (index, field, value) => {
     const newRows = [...rows];
     newRows[index][field] = value;
-    setRows(newRows);
-  };
+    updateRows(newRows);
+};
 
   const addRow = () => {
-    setRows([{ id: rows.length + 1, company: "", status: "", industry: "", position: "" },...rows]);
-  };
+    const newRow = { id: rows.length + 1, company: "", status: "", industry: "", position: "" };
+    setRows(prevRows => {
+        const updatedRows = [newRow, ...prevRows];
+        localStorage.setItem('tableRows', JSON.stringify(updatedRows));
+        return updatedRows;
+    });
+};
 
   return (
       <div>
@@ -36,10 +49,9 @@ const InteractiveTable = () => {
               <tr key={row.id}>
                 <td>{index + 1}</td>
                 <td>
-                  <Form.Control
-                    type="text"
+                <TableAutoFill
                     value={row.company}
-                    onChange={(e) => handleChange(index, "company", e.target.value)}
+                    onChange={(newValue) => handleChange(index, 'company', newValue)}
                   />
                 </td>
                 <StatusCell
