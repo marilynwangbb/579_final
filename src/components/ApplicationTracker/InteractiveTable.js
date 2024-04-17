@@ -4,13 +4,15 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import StatusCell from './StatusCell';
 import TableAutoFill from './TableAutoFill';
-import companies from './data/companies';
+import './InteractiveTable.css';
 
 const InteractiveTable = () => {
   const [rows, setRows] = useState(() => {
     const savedRows = localStorage.getItem('tableRows');
-    return savedRows ? JSON.parse(savedRows) : [{ id: 1, company: "", status: "", industry: "", position: "" }];
+    return savedRows ? JSON.parse(savedRows) : [{ id: 1, company: "", status: "", industry: "", position: "", applicationLink: "" }];
   });
+
+  const [note, setNote] = useState('');
 
   const updateRows = (newRows) => {
     setRows(newRows);
@@ -24,7 +26,7 @@ const InteractiveTable = () => {
 };
 
   const addRow = () => {
-    const newRow = { id: rows.length + 1, company: "", status: "", industry: "", position: "" };
+    const newRow = { id: rows.length + 1, company: "", status: "", industry: "", position: "", applicationLink: "" };
     setRows(prevRows => {
         const updatedRows = [newRow, ...prevRows];
         localStorage.setItem('tableRows', JSON.stringify(updatedRows));
@@ -42,6 +44,7 @@ const InteractiveTable = () => {
               <th>Status</th>
               <th>Industry</th>
               <th>Position</th>
+              <th>Application Link</th>
             </tr>
           </thead>
           <tbody>
@@ -77,6 +80,18 @@ const InteractiveTable = () => {
                     onChange={(e) => handleChange(index, "position", e.target.value)}
                   />
                 </td>
+                <td>
+                  <Form.Control
+                    type="text"
+                    placeholder="Paste application link here"
+                    value={row.applicationLink}
+                    onChange={(e) => handleChange(index, 'applicationLink', e.target.value)}
+                  />
+                  {row.applicationLink && (
+                    <a href={row.applicationLink} target="_blank" rel="noopener noreferrer">Open Link</a>
+                  )}
+                </td>
+
               </tr>
             ))}
           </tbody>
