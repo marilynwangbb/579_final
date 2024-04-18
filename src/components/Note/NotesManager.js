@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, ListGroup, Modal } from 'react-bootstrap';
 
 const NotesManager = () => {
     const [notes, setNotes] = useState([]);
-    const [newNote, setNewNote] = useState({ title: '', content: '' });
+    const [newNote, setNewNote] = useState({ title: '', content: '', keywords: '' });
     const [showAdd, setShowAdd] = useState(false);
     const [viewNote, setViewNote] = useState(null);
+
+    useEffect(() => {
+        const savedNotes = localStorage.getItem('notes');
+        if (savedNotes) {
+            setNotes(JSON.parse(savedNotes));
+        }
+    }, []);
 
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
@@ -19,18 +26,24 @@ const NotesManager = () => {
 
     const addNote = () => {
         if (newNote.title.trim() && newNote.content.trim()) {
-            setNotes(prevNotes => [
-                ...prevNotes,
-                { id: prevNotes.length + 1, title: newNote.title, content: newNote.content, highlighted: false }
-            ]);
-            setNewNote({ title: '', content: '' });
+            const newNotes = [...notes, {
+                id: notes.length + 1,
+                title: newNote.title,
+                content: newNote.content,
+                keywords: newNote.keywords.split(',').map(keyword => keyword.trim()).filter(keyword => keyword),
+                date: new Date().toISOString().split('T')[0], // Automatically set to today's date
+                highlighted: false
+            }];
+            setNotes(newNotes);
+            localStorage.setItem('notes', JSON.stringify(newNotes.sort((a, b) => new Date(b.date) - new Date(a.date))));
+            setNewNote({ title: '', content: '', keywords: '' });
             handleCloseAdd();
         }
     };
 
     return (
         <div>
-            <Button variant="primary" onClick={handleShowAdd}>Add New Note</Button>
+            
             <Modal show={showAdd} onHide={handleCloseAdd}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add a Note</Modal.Title>
@@ -55,6 +68,15 @@ const NotesManager = () => {
                             placeholder="Write your note content here..."
                         />
                     </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Keywords</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={newNote.keywords}
+                            onChange={(e) => setNewNote({...newNote, keywords: e.target.value})}
+                            placeholder="Enter keywords, separated by commas"
+                        />
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseAdd}>
@@ -65,6 +87,18 @@ const NotesManager = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            <ListGroup className="mt-3">
+                {notes.sort((a, b) => new Date(b.date) - new Date(a.date)).map(note => (
+                    <ListGroup.Item
+                        key={note.id}
+                        action
+                        onClick={() => handleShowView(note)}
+                    >
+                        {new Date(note.date).toLocaleDateString()} - {note.title} - {note.keywords.join(', ')}
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
 
             <Modal show={viewNote !== null} onHide={handleCloseView}>
                 <Modal.Header closeButton>
@@ -78,17 +112,7 @@ const NotesManager = () => {
                 </Modal.Footer>
             </Modal>
 
-            <ListGroup className="mt-3">
-                {notes.map(note => (
-                    <ListGroup.Item
-                        key={note.id}
-                        action
-                        onClick={() => handleShowView(note)}
-                    >
-                        {note.title}
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
+            <Button variant="primary" onClick={handleShowAdd}>Add New Note</Button>
         </div>
     );
 };
