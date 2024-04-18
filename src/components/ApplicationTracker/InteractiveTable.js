@@ -35,7 +35,7 @@ const InteractiveTable = () => {
 };
 
   return (
-      <div>
+      <div className = "interactive-table-container">
         <Table striped bordered hover>
           <thead>
             <tr>

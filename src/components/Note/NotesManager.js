@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, ListGroup, Modal } from 'react-bootstrap';
-
+import './NotesManager.css';
 const NotesManager = () => {
     const [notes, setNotes] = useState([]);
     const [newNote, setNewNote] = useState({ title: '', content: '', keywords: '' });
@@ -31,7 +31,7 @@ const NotesManager = () => {
                 title: newNote.title,
                 content: newNote.content,
                 keywords: newNote.keywords.split(',').map(keyword => keyword.trim()).filter(keyword => keyword),
-                date: new Date().toISOString().split('T')[0], // Automatically set to today's date
+                date: new Date().toISOString().split('T')[0],
                 highlighted: false
             }];
             setNotes(newNotes);
@@ -88,6 +88,7 @@ const NotesManager = () => {
                 </Modal.Footer>
             </Modal>
 
+            <div className="list-group-container">
             <ListGroup className="mt-3">
                 {notes.sort((a, b) => new Date(b.date) - new Date(a.date)).map(note => (
                     <ListGroup.Item
@@ -95,10 +96,11 @@ const NotesManager = () => {
                         action
                         onClick={() => handleShowView(note)}
                     >
-                        {new Date(note.date).toLocaleDateString()} - {note.title} - {note.keywords.join(', ')}
+                        {new Date(note.date).toLocaleDateString()} - {note.title} - <span className="keywords">{note.keywords.join(',')}</span>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
+            </div>
 
             <Modal show={viewNote !== null} onHide={handleCloseView}>
                 <Modal.Header closeButton>
@@ -106,7 +108,7 @@ const NotesManager = () => {
                 </Modal.Header>
                 <Modal.Body>{viewNote?.content}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseView}>
+                    <Button className="new-note-button" variant="secondary" onClick={handleCloseView}>
                         Close
                     </Button>
                 </Modal.Footer>

@@ -12,7 +12,7 @@ const StatusTagsContainer = () => {
   ];
 
   return (
-    <div style={{ padding: '20px', backgroundColor:'#f2f3f3', marginBottom: '20px' }}>
+    <div style={{ margin: '20px', padding: '10px', backgroundColor:'#f2f3f3', marginBottom: '20px' }}>
       {statuses.map((status, index) => (
         <StatusTag key={index} status={status} />
       ))}

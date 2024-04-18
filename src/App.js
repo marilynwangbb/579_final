@@ -5,17 +5,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from './components/Banner';
 import './App.css';
 import NavBar from './components/NavBar';
+import SummaryContainer from './components/Summary/SummaryContainer';
 import InteractiveTable from './components/ApplicationTracker/InteractiveTable';
 import StatusTagsContainer from './components/ApplicationTracker/StatusTagsContainer';
 import NewsList from './components/News/NewsList';
 import AffirmationItem from './components/Affirmation/AffirmationItem';
 import NotesManager from './components/Note/NotesManager';
+import Divider from './components/Divider';
 function App() {
   return (
     <div className="App">
       <Banner />
       <NavBar />
-
+      
+      <SummaryContainer id="summary" />
+      
       <h1 id="job-application">Job Application</h1>
 
       <AffirmationItem />
@@ -23,9 +27,12 @@ function App() {
       <StatusTagsContainer />
       <InteractiveTable />
       </DndProvider>
-      <NewsList />
-      <h1 id="notes-manager">Note Manager</h1>
+      
+      <Divider />
+      <h1 id="notes-manager">Recap Note</h1>
       <NotesManager />
+      <Divider />
+      <NewsList />
     </div>
   );
 }

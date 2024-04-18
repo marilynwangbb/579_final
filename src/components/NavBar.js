@@ -15,7 +15,7 @@ function NavBar() {
           <Nav.Link href="#job-application">Application</Nav.Link>
 
           <NavDropdown title="Recap" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Summary</NavDropdown.Item>
+              <NavDropdown.Item href="#summary">Summary</NavDropdown.Item>
               <NavDropdown.Item href="#notes-manager">
                 Recap Note
               </NavDropdown.Item>
