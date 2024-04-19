@@ -18,15 +18,22 @@ function App() {
       <Banner />
       <NavBar />
       
-      <SummaryContainer id="summary" />
+      
       
       <h1 id="job-application">Job Application</h1>
 
       <AffirmationItem />
+
+      <div id="summary">
+      <SummaryContainer  />
+      </div>
+ 
       <DndProvider backend={HTML5Backend}>
       <StatusTagsContainer />
       <InteractiveTable />
       </DndProvider>
+
+      
       
       <Divider />
       <h1 id="notes-manager">Recap Note</h1>
