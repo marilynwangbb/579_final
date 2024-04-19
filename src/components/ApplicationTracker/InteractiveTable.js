@@ -9,8 +9,8 @@ import './InteractiveTable.css';
 const InteractiveTable = () => {
   const [rows, setRows] = useState(() => {
     const savedRows = localStorage.getItem('tableRows');
-    return savedRows ? JSON.parse(savedRows) : [{ id: 1, company: "", status: "", industry: "", position: "", applicationLink: "" }];
-  });
+    return savedRows ? JSON.parse(savedRows) : [{ id: 1, company: "", status: "", industry: "", position: "", applicationLink: "", dueDate: "" }];
+});
 
   const [note, setNote] = useState('');
 
@@ -26,7 +26,7 @@ const InteractiveTable = () => {
 };
 
   const addRow = () => {
-    const newRow = { id: rows.length + 1, company: "", status: "", industry: "", position: "", applicationLink: "" };
+    const newRow = { id: rows.length + 1, company: "", status: "", industry: "", position: "", applicationLink: "", dueDate: "" };
     setRows(prevRows => {
         const updatedRows = [newRow, ...prevRows];
         localStorage.setItem('tableRows', JSON.stringify(updatedRows));
@@ -45,6 +45,7 @@ const InteractiveTable = () => {
               <th>Industry</th>
               <th>Position</th>
               <th>Application Link</th>
+              <th>Due Date</th>
             </tr>
           </thead>
           <tbody>
@@ -90,6 +91,14 @@ const InteractiveTable = () => {
                   {row.applicationLink && (
                     <a href={row.applicationLink} target="_blank" rel="noopener noreferrer">Open Link</a>
                   )}
+                </td>
+
+                <td>
+                    <Form.Control
+                        type="date"
+                        value={row.dueDate}
+                        onChange={(e) => handleChange(index, 'dueDate', e.target.value)}
+                    />
                 </td>
 
               </tr>
