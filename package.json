@@ -2,6 +2,7 @@
   "name": "template-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://marilynwangbb.github.io/579_final",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -45,7 +46,9 @@
     "local:component": "concurrently --kill-others --success=first \"npm run start\" \"npm run cy:run:component\"",
     "local:run:record": "start 8080 cy:run:record",
     "lint:js": "eslint js/script.js ",
-    "lint": "npm run lint:js"
+    "lint": "npm run lint:js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -67,9 +70,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "concurrently": "^7.3.0",
     "cypress-react-selector": "^3.0.0",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.4.3"
   }
+
 }
