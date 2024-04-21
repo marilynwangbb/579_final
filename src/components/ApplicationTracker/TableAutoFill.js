@@ -8,9 +8,9 @@
         return (
           <Autocomplete
             value={value}
-            onChange={(event, newValue) => onChange(newValue)} // This passes the new value up to the parent component
+            onChange={(event, newValue) => onChange(newValue)}
             options={companies}
-            getOptionLabel={(option) => option} // Using option as it's already a string
+            getOptionLabel={(option) => option} 
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Company" variant="outlined" />}
           />
