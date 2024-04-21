@@ -59,10 +59,10 @@ function SummaryContainer() {
         if (daysUntilDue <= 3) {
             dueIn3Days++;
         }
-        if (daysUntilDue <= 5) {
+        if (daysUntilDue > 3 && daysUntilDue <= 5) {
             dueIn5Days++;
         }
-        if (daysUntilDue <= 7) {
+        if (daysUntilDue > 5 && daysUntilDue <= 7) {
             dueIn7Days++;
         }
     });
