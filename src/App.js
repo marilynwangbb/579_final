@@ -8,7 +8,6 @@ import NavBar from './components/NavBar';
 import SummaryContainer from './components/Summary/SummaryContainer';
 import InteractiveTable from './components/ApplicationTracker/InteractiveTable';
 import StatusTagsContainer from './components/ApplicationTracker/StatusTagsContainer';
-import NewsList from './components/News/NewsList';
 import AffirmationItem from './components/Affirmation/AffirmationItem';
 import NotesManager from './components/Note/NotesManager';
 import Divider from './components/Divider';
@@ -39,7 +38,7 @@ function App() {
       <h1 id="notes-manager">Recap Note</h1>
       <NotesManager />
       <Divider />
-      <NewsList />
+      <h1 id="news-area">News</h1>
     </div>
   );
 }

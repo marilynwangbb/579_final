@@ -20,18 +20,9 @@ function NavBar() {
                 Recap Note
               </NavDropdown.Item>
             </NavDropdown>
-        
-            <NavDropdown title="News" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Tech</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Finance
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Healthcare</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Breaking News
-              </NavDropdown.Item>
-            </NavDropdown>
+
+            <Nav.Link href="#news-area">News</Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>

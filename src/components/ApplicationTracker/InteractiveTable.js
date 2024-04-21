@@ -32,6 +32,13 @@ const InteractiveTable = () => {
         localStorage.setItem('tableRows', JSON.stringify(updatedRows));
         return updatedRows;
     });
+
+  
+};
+
+const deleteRow = (index) => {
+  const updatedRows = rows.filter((_, idx) => idx !== index);
+  updateRows(updatedRows);
 };
 
   return (
@@ -100,6 +107,10 @@ const InteractiveTable = () => {
                         onChange={(e) => handleChange(index, 'dueDate', e.target.value)}
                     />
                 </td>
+
+              <td>
+                <Button variant="danger" onClick={() => deleteRow(index)}>x</Button>
+              </td>
 
               </tr>
             ))}

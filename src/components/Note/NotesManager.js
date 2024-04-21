@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import './NotesManager.css';
+
 const NotesManager = () => {
     const [notes, setNotes] = useState([]);
     const [newNote, setNewNote] = useState({ title: '', content: '', keywords: '' });
@@ -41,9 +42,14 @@ const NotesManager = () => {
         }
     };
 
+    const deleteNote = (id) => {
+        const updatedNotes = notes.filter(note => note.id !== id);
+        setNotes(updatedNotes);
+        localStorage.setItem('notes', JSON.stringify(updatedNotes));
+    };
+
     return (
         <div>
-            
             <Modal show={showAdd} onHide={handleCloseAdd}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add a Note</Modal.Title>
@@ -90,13 +96,17 @@ const NotesManager = () => {
 
             <div className="list-group-container">
             <ListGroup className="mt-3">
-                {notes.sort((a, b) => new Date(b.date) - new Date(a.date)).map(note => (
+                {notes.map(note => (
                     <ListGroup.Item
                         key={note.id}
                         action
                         onClick={() => handleShowView(note)}
                     >
-                        {new Date(note.date).toLocaleDateString()} - {note.title} - <span className="keywords">{note.keywords.join(',')}</span>
+                        {new Date(note.date).toLocaleDateString()} - {note.title} - <span className="keywords">{note.keywords.join(', ')}</span>
+                        <Button variant="danger" size="sm" onClick={(e) => {
+                            e.stopPropagation(); // Prevent onClick event from firing when the button is clicked
+                            deleteNote(note.id);
+                        }}>x</Button>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
