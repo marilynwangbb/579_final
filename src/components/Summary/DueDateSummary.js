@@ -3,7 +3,6 @@ import { Table } from 'react-bootstrap';
 
 const DueDateSummary = ({ counts }) => {
 
-    console.log(counts)
     return (
         <Table striped bordered hover>
             <thead>

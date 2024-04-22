@@ -31,11 +31,7 @@ const AffirmationItem = () => {
     }, []); 
 
     return (
-        //<div className="quote-banner" >
-            //<div className = "quote-text">
-                //{quote}
-            //</div>
-        //</div>
+
         <Offcanvas show={show} onHide={handleClose} placement ='top'>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Positivity of the Day</Offcanvas.Title>

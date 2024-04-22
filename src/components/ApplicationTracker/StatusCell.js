@@ -24,3 +24,5 @@ const StatusCell = ({ index, currentStatus, onStatusChange }) => {
 };
 
 export default StatusCell;
+
+

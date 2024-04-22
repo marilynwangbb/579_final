@@ -3,7 +3,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
 import './Summary.css';
 
-const Summary = ({ data, refreshSummary }) => {
+const Summary = ({data}) => {
     const calculatePercentage = (count) => {
         if (data.total === 0) return 0;
         return (count / data.total * 100).toFixed(1);

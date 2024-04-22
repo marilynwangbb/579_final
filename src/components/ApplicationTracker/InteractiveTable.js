@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Table, Form, Button } from 'react-bootstrap';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import StatusCell from './StatusCell';
 import TableAutoFill from './TableAutoFill';
 import './InteractiveTable.css';
@@ -12,7 +10,6 @@ const InteractiveTable = () => {
     return savedRows ? JSON.parse(savedRows) : [{ id: 1, company: "", status: "", industry: "", position: "", applicationLink: "", dueDate: "" }];
 });
 
-  const [note, setNote] = useState('');
 
   const updateRows = (newRows) => {
     setRows(newRows);
