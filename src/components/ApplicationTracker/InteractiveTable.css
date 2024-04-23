@@ -2,3 +2,9 @@
     margin: 20px;
     padding: 10px;
 }
+
+.filter-select {
+    width: 200px;
+    margin-bottom: 20px;
+    border-color: #409dbf;
+  }

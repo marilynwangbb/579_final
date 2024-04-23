@@ -3,17 +3,15 @@ import { Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import './NotesManager.css';
 
 const NotesManager = () => {
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState(() => {
+        const savedNotes = localStorage.getItem('notes');
+        return savedNotes ? JSON.parse(savedNotes) : [];
+    });
+
     const [newNote, setNewNote] = useState({ title: '', content: '', keywords: '' });
     const [showAdd, setShowAdd] = useState(false);
     const [viewNote, setViewNote] = useState(null);
 
-    useEffect(() => {
-        const savedNotes = localStorage.getItem('notes');
-        if (savedNotes) {
-            setNotes(JSON.parse(savedNotes));
-        }
-    }, []);
 
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
