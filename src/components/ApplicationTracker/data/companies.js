@@ -27,7 +27,7 @@ const companies = [
     "Zimmer Biomet Holdings", "Alcon", "Zoetis", "C.Q. Pharmaceutical Holding", "Eisai", "Vertex Pharmaceuticals", "Ucb", "Grifols", "Terumo", "China National Medicines",
     "Shenzhen Neptunus", "China Meheco Group", "Select Medical Holdings", "Hoya Corp.", "Agilent Technologies", "Sumitomo Pharma", "Perrigo Company", "Huadong Medicine", "Lonza Group", "Yunnan Baiyao Group",
     "Sonic Healthcare", "Encompass Health", "Smith & Nephew", "Orpea", "Sun Pharmaceutical Industries", "Shanghai Fosun Pharmaceutical", "Edwards Lifesciences", "Intuitive Surgical", "Korian", "Ramsay Generale De Sante",
-    "Catalent", "Nipro", "Jiangsu Hengrui", "Mediclinic International Plc", "Genesis Healthcare", "Draegerwerk", "Protek", "Perkinelmer, Inc.", "Hologic", "Elanco Animal Health"
+    "Catalent", "Nipro", "Jiangsu Hengrui", "Mediclinic International Plc", "Genesis Healthcare", "Draegerwerk", "Protek", "Perkinelmer, Inc.", "Hologic", "Elanco Animal Health","BlackRock","Black Stone" 
     
     ];
 
